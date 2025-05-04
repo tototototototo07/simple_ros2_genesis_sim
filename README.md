@@ -1,7 +1,7 @@
 # simple_ros2_genesis_sim
 Simply send target joint angles from ROS 2 to control the robot in Genesis. This repository also includes an example program to control a snake robot.  
 When looking to try out a robot model using ros, Gazebo seemed a bit complicated for a beginner, so I made this. If you want to try out detailed control of your robot, try Gazebo.
-
+[https://tototototototo7.hatenablog.com/entry/2025/simple_ros2_genesis_sim](https://tototototototo7.hatenablog.com/entry/2025/simple_ros2_genesis_sim)
 ![sim_img](imgs/sim.png)
 
 ## Test Environment

@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    jnt_names : ["joint_l", "joint_r"]  # string[]
+    # optional
+    #dofs_kp   : [10.0, 10.0] # double[]
+    #dofs_kv   : [1.0, 1.0] # double[]
+    #dofs_force_lower : [-1.0, -1.0]  # double[]
+    #dofs_force_upper : [1.0, 1.0]           # double[]

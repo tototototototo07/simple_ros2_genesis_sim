@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    jnt_names : ["joint1", "joint2", "joint3", "joint4", "joint5", "joint6", "joint7", "finger_joint1", "finger_joint2"]  # string[]
+    # optional
+    dofs_kp   : [4500.0, 4500.0, 3500.0, 3500.0, 2000.0, 2000.0, 2000.0, 100.0, 100.0]    # double[]
+    dofs_kv   : [450.0, 450.0, 350.0, 350.0, 200.0, 200.0, 200.0, 10.0, 10.0]             # double[]
+    dofs_force_lower : [-87.0, -87.0, -87.0, -87.0, -12.0, -12.0, -12.0, -100.0, -100.0]  # double[]
+    #dofs_force_lower : [-0.01, -0.01, -0.01, -0.01, -0.01, -0.01, -0.01, -0.01, -0.01]  # double[]
+    dofs_force_upper : [87.0, 87.0, 87.0, 87.0, 12.0, 12.0, 12.0, 100.0, 100.0]           # double[]

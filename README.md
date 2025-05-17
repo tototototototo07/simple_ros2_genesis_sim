@@ -10,29 +10,37 @@ When looking to try out a robot model using ros, Gazebo seemed a bit complicated
 - genesis-world: 0.2.1  
 - torch: 2.6.0+cpu  
 
-## Install Genesis
-Install Genesis according to [https://github.com/Genesis-Embodied-AI/Genesis](https://github.com/Genesis-Embodied-AI/Genesis).
-```bash
-# Install torch according to https://pytorch.org/
-```
-```bash
-pip3 install genesis-world
-```
+## Install and Build  
+For Info on Genesis: [https://github.com/Genesis-Embodied-AI/Genesis](https://github.com/Genesis-Embodied-AI/Genesis)  
 
-## Build
+### Option 1: Virtual Environment  
 ```bash
 mkdir -p ~/simple_ros2_genesis_sim_ws/src && cd ~/simple_ros2_genesis_sim_ws 
 python3 -m venv --prompt genesis_env .venv
 source .venv/bin/activate
 export PYTHONPATH=$(python -c 'import site; print(site.getsitepackages()[0])'):$PYTHONPATH
 pip3 install ~~~~~ # Install torch according to https://pytorch.org/
-pip3 install genesis-world
-pip3 install catkin_pkg
+pip3 install genesis-world catkin_pkg
+pip3 uninstall -y matplotlib
 cd src
 git clone https://github.com/tototototototo07/simple_ros2_genesis_sim.git
 cd ..
+# source /opt/ros/humble/setup.bash
 colcon build
 source install/setup.bash
+```
+Setup for Later Use:  
+```bash
+cd ~/simple_ros2_genesis_sim_ws
+source .venv/bin/activate
+export PYTHONPATH=$(python -c 'import site; print(site.getsitepackages()[0])'):$PYTHONPATH
+source install/setup.bash
+```
+
+### Option 2: Global Environment (Not Recommended)    
+```bash
+pip3 install ~~~~~ # Install torch according to https://pytorch.org/
+pip3 install genesis-world
 ```
 
 ```bash
@@ -43,6 +51,7 @@ cd ..
 colcon build
 source install/setup.bash
 ```
+
 
 ## Usage
 ### Included Example Packages

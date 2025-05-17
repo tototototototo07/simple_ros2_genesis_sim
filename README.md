@@ -21,6 +21,21 @@ pip3 install genesis-world
 
 ## Build
 ```bash
+mkdir -p ~/simple_ros2_genesis_sim_ws/src && cd ~/simple_ros2_genesis_sim_ws 
+python3 -m venv --prompt genesis_env .venv
+source .venv/bin/activate
+export PYTHONPATH=$(python -c 'import site; print(site.getsitepackages()[0])'):$PYTHONPATH
+pip3 install ~~~~~ # Install torch according to https://pytorch.org/
+pip3 install genesis-world
+pip3 install catkin_pkg
+cd src
+git clone https://github.com/tototototototo07/simple_ros2_genesis_sim.git
+cd ..
+colcon build
+source install/setup.bash
+```
+
+```bash
 mkdir -p ~/simple_ros2_genesis_sim_ws/src
 cd ~/simple_ros2_genesis_sim_ws/src
 git clone https://github.com/tototototototo07/simple_ros2_genesis_sim.git

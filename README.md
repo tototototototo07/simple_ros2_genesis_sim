@@ -92,3 +92,17 @@ When the button is pressed, the robot transitions to the corresponding gait. Pre
   Make the motion rotate while maintaining the shape. When pedal and lateral gait, it is used for lateral movement, and when helical gait, it is used for movement along the axis.
 ### Change radius  
 Change the radius of lateral and helical gait. The change rate varies depending on whether the current radius is large or small. 
+
+
+## Troubleshooting  
+#### Error when using simple shapes (e.g. example_sim)  
+```bash
+~~~
+[genesis_sim-2]   File "~/simple_ros2_genesis_sim_ws/.venv/lib/python3.10/site-packages/genesis/engine/entities/rigid_entity/rigid_geom.py", line 224, in _compute_sd
+[genesis_sim-2]     sd, _, _ = igl.signed_distance(query_points, self._sdf_verts, self._sdf_faces)
+[genesis_sim-2] ValueError: too many values to unpack (expected 3)
+```
+Downgrade the version of ```libigl``` from 2.6 to 2.5
+```bash
+pip3 install libigl==2.5.1
+```

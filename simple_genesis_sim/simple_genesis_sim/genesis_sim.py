@@ -25,10 +25,10 @@ class GenesisSim(Node):
         super().__init__('simple_genesis_sim')
 
         self.declare_parameter('model_path', '')
-        self.model_path = self.get_parameter('model_path').get_parameter_value().string_value
+        self.model_path: str = self.get_parameter('model_path').get_parameter_value().string_value
 
         self.declare_parameter('jnt_names', [''])
-        self.jnt_names = self.get_parameter('jnt_names').get_parameter_value().string_array_value
+        self.jnt_names: list[str] = self.get_parameter('jnt_names').get_parameter_value().string_array_value
         if self.jnt_names[0]=='':
             self.get_logger().warn("No joints are set to operate in 'parameter.yaml'.")
 
@@ -36,10 +36,10 @@ class GenesisSim(Node):
         self.declare_parameter('dofs_kv', [float('nan')])
         self.declare_parameter('dofs_force_upper', [float('nan')]) 
         self.declare_parameter('dofs_force_lower', [float('nan')])
-        self.dofs_kp = self.get_parameter('dofs_kp').get_parameter_value().double_array_value
-        self.dofs_kv = self.get_parameter('dofs_kv').get_parameter_value().double_array_value
-        self.dofs_force_lower = self.get_parameter('dofs_force_lower').get_parameter_value().double_array_value
-        self.dofs_force_upper = self.get_parameter('dofs_force_upper').get_parameter_value().double_array_value
+        self.dofs_kp: list[float] = self.get_parameter('dofs_kp').get_parameter_value().double_array_value
+        self.dofs_kv: list[float]  = self.get_parameter('dofs_kv').get_parameter_value().double_array_value
+        self.dofs_force_lower: list[float]  = self.get_parameter('dofs_force_lower').get_parameter_value().double_array_value
+        self.dofs_force_upper: list[float]  = self.get_parameter('dofs_force_upper').get_parameter_value().double_array_value
 
         self.declare_parameter('put_objects', False)
         self.declare_parameter('env_objects_dir', '')
@@ -74,14 +74,14 @@ class GenesisSim(Node):
         self.recording: bool = self.get_parameter('recording').get_parameter_value().bool_value
         self.get_logger().info(f"recording: {self.recording}")
         if self.recording:
-            self.video_name = 'video_' + datetime.now().strftime('%Y%m%d_%H%M%S') + '.mp4'
+            self.video_name: str = 'video_' + datetime.now().strftime('%Y%m%d_%H%M%S') + '.mp4'
             self.callback_group_2 = rclpy.callback_groups.MutuallyExclusiveCallbackGroup()
             self.record_stop_subscription = self.create_subscription(Empty, '/stop_recording', self.record_stop_callback, 1, callback_group=self.callback_group_2)
 
         
         self.genesis_build()  
 
-        self.running = True
+        self.running: bool = True
 
         self.pub_clock(self.sim_time)
         if self.recording:
@@ -145,7 +145,7 @@ class GenesisSim(Node):
 
         #### environment objects ####
         if self.get_parameter('put_objects').get_parameter_value().bool_value:
-            self.env_objects_dir: bool = self.get_parameter('env_objects_dir').get_parameter_value().string_value
+            self.env_objects_dir: str = self.get_parameter('env_objects_dir').get_parameter_value().string_value
 
             self.cylinder = self.scene.add_entity(
                 gs.morphs.URDF(

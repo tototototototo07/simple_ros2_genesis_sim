@@ -36,10 +36,14 @@ class GenesisSim(Node):
         self.declare_parameter('dofs_kv', [float('nan')])
         self.declare_parameter('dofs_force_upper', [float('nan')]) 
         self.declare_parameter('dofs_force_lower', [float('nan')])
+        self.declare_parameter('base_init_pos', [float('nan')])
+        self.declare_parameter('base_init_quat', [float('nan')])
         self.dofs_kp: list[float] = self.get_parameter('dofs_kp').get_parameter_value().double_array_value
         self.dofs_kv: list[float]  = self.get_parameter('dofs_kv').get_parameter_value().double_array_value
         self.dofs_force_lower: list[float]  = self.get_parameter('dofs_force_lower').get_parameter_value().double_array_value
         self.dofs_force_upper: list[float]  = self.get_parameter('dofs_force_upper').get_parameter_value().double_array_value
+        self.base_init_pos:  list[float]  = self.get_parameter('base_init_pos').get_parameter_value().double_array_value
+        self.base_init_quat: list[float]  = self.get_parameter('base_init_quat').get_parameter_value().double_array_value
 
         self.declare_parameter('put_objects', False)
         self.declare_parameter('env_objects_dir', '')
@@ -123,16 +127,25 @@ class GenesisSim(Node):
             gs.morphs.Plane(),
         )
 
+        self.model_arg_dict = {'file': self.model_path}
+        if  not math.isnan(self.base_init_pos[0]) and len(self.base_init_pos)==3:
+            self.model_arg_dict['pos'] = self.base_init_pos
+        if  not math.isnan(self.base_init_quat[0]) and len(self.base_init_quat)==4:
+            self.model_arg_dict['quat'] = self.base_init_quat
+
         if self.model_path.endswith(".xml"):
             self.robot = self.scene.add_entity(
                 #gs.morphs.MJCF(file="xml/robot_emika_panda/panda.xml"),
-                gs.morphs.MJCF(file=self.model_path),
+                #gs.morphs.MJCF(file=self.model_path),
+                gs.morphs.MJCF(**self.model_arg_dict),
             )
         elif self.model_path.endswith(".urdf"):
+            self.model_arg_dict['fixed']=False
             self.robot = self.scene.add_entity(
-                gs.morphs.URDF(file=self.model_path,
-                               fixed=False,
-                               ),
+                #gs.morphs.URDF(file=self.model_path,
+                #               fixed=False,
+                #               ),
+                gs.morphs.URDF(**self.model_arg_dict),
             )
 
         self.cam = self.scene.add_camera(

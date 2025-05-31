@@ -5,4 +5,6 @@
     #dofs_kp   : [10.0, 10.0] # double[]
     #dofs_kv   : [1.0, 1.0] # double[]
     #dofs_force_lower : [-1.0, -1.0]  # double[]
-    #dofs_force_upper : [1.0, 1.0]           # double[]
+    #dofs_force_upper : [1.0, 1.0]    # double[]
+    base_init_pos  : [0.0, 0.0, 0.10]     # double[]
+    base_init_quat : [1.0, 0.0, 0.0, 0.0] # double[]
